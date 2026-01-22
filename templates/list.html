@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Customers and Orders</title>
+  </head>
+  <body>
+    <h1>Customers and Their Orders</h1>
+
+    <ul>
+      {% for customer in customers %}
+      <li>
+        <strong>{{ customer.name }}</strong> ({{ customer.email }}) {% if
+        customer.order_set.all %}
+        <ul>
+          {% for order in customer.order_set.all %}
+          <li>
+            Order No: {{ order.order_number }} | Amount: {{ order.total_amount
+            }}
+          </li>
+          {% empty %}
+          <li>No orders available</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </li>
+      {% empty %}
+      <li>No customers found</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
